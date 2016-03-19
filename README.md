@@ -8,10 +8,13 @@
 
 相关博客文章：
 
-[《Android音频开发（1）：基础知识》]（http://ticktick.blog.51cto.com/823160/1748506）
-[《Android音频开发（2）：如何采集一帧音频》]（http://ticktick.blog.51cto.com/823160/1749719）
-[《Android音频开发（3）：如何播放一帧音频》]（http://ticktick.blog.51cto.com/823160/1750593）
-[《Android音频开发（4）：如何存储和解析wav文件》]（http://ticktick.blog.51cto.com/823160/1752947）
+[Android音频开发（1）：基础知识](http://ticktick.blog.51cto.com/823160/1748506)
+
+[Android音频开发（2）：如何采集一帧音频](http://ticktick.blog.51cto.com/823160/1749719)
+
+[Android音频开发（3）：如何播放一帧音频](http://ticktick.blog.51cto.com/823160/1750593)
+
+[Android音频开发（4）：如何存储和解析wav文件](http://ticktick.blog.51cto.com/823160/1752947)
 
 Thanks
 ----------
