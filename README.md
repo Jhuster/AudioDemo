@@ -6,7 +6,8 @@
 2. 如何利用 AudioTrack API 完成 PCM 音频信号的播放
 3. 如何读/写标准的 wav 格式的音频文件
 
-相关博客文章：
+相关博客文章
+----------
 
 [Android音频开发（1）：基础知识](http://ticktick.blog.51cto.com/823160/1748506)
 
@@ -16,7 +17,7 @@
 
 [Android音频开发（4）：如何存储和解析wav文件](http://ticktick.blog.51cto.com/823160/1752947)
 
-Thanks
+感谢
 ----------
 
 谢谢你的关注，欢迎提供建议和意见，联系方式：lujun.hust@gmail.com
