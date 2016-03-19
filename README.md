@@ -2,9 +2,16 @@
 
 本 demo app 演示了如何在 Android 平台上开发音频相关应用，具体演示的功能包括：
 
-1. 如何利用 AudioRecord API 完成 PCM 音频信号的采集，相关博文地址：[《Android音频开发（2）：如何采集一帧音频》][1]
-2. 如何利用 AudioTrack API 完成 PCM 音频信号的播放，相关博文地址：[《Android音频开发（3）：如何播放一帧音频》][2]
+1. 如何利用 AudioRecord API 完成 PCM 音频信号的采集
+2. 如何利用 AudioTrack API 完成 PCM 音频信号的播放
 3. 如何读/写标准的 wav 格式的音频文件
+
+相关博客文章：
+
+[《Android音频开发（1）：基础知识》]（http://ticktick.blog.51cto.com/823160/1748506）
+[《Android音频开发（2）：如何采集一帧音频》]（http://ticktick.blog.51cto.com/823160/1749719）
+[《Android音频开发（3）：如何播放一帧音频》]（http://ticktick.blog.51cto.com/823160/1750593）
+[《Android音频开发（4）：如何存储和解析wav文件》]（http://ticktick.blog.51cto.com/823160/1752947）
 
 Thanks
 ----------
