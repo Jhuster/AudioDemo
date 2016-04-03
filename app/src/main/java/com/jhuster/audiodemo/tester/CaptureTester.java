@@ -22,11 +22,10 @@ public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameC
             mWavFileWriter.openFile(DEFAULT_TEST_FILE, 44100, 16, 2);
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
-
         mAudioCapturer.setOnAudioFrameCapturedListener(this);
-        mAudioCapturer.startCapture();
-        return true;
+        return mAudioCapturer.startCapture();
     }
 
     @Override
@@ -36,6 +35,7 @@ public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameC
             mWavFileWriter.closeFile();
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         return true;
     }

@@ -24,6 +24,7 @@ public class PlayerTester extends Tester {
             mWavFileReader.openFile(DEFAULT_TEST_FILE);
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
 
         mAudioPlayer.startPlayer();

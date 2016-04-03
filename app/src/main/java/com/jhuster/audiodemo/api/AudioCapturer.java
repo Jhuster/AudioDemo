@@ -40,6 +40,10 @@ public class AudioCapturer {
 
     public interface OnAudioFrameCapturedListener {
         void onAudioFrameCaptured(byte[] audioData);
+    }	
+
+    public boolean isCaptureStarted() {		
+        return mIsCaptureStarted;
     }
 
     public void setOnAudioFrameCapturedListener(OnAudioFrameCapturedListener listener) {
