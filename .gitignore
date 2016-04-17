@@ -35,4 +35,7 @@ build/
 # Mac system files
 .DS_Store
 
+# Ndk
+obj
+
 *.keystore

@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.jhuster.audiodemo.R;
 import com.jhuster.audiodemo.tester.CaptureTester;
+import com.jhuster.audiodemo.tester.NativeAudioTester;
 import com.jhuster.audiodemo.tester.PlayerTester;
 import com.jhuster.audiodemo.tester.Tester;
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private Tester mTester;
 
     public static final String[] TEST_PROGRAM_ARRAY = {
-        "录制wav文件","播放wav文件"
+        "录制wav文件", "播放wav文件", "Native录制pcm", "Native播放pcm"
     };
 
     @Override
@@ -36,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
             case 0: mTester = new CaptureTester();
                 break;
             case 1: mTester = new PlayerTester();
+                break;
+            case 2: mTester = new NativeAudioTester(true);
+                break;
+            case 3: mTester = new NativeAudioTester(false);
                 break;
             default:
                 break;
