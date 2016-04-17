@@ -5,6 +5,7 @@
 1. 如何利用 AudioRecord API 完成 PCM 音频信号的采集
 2. 如何利用 AudioTrack API 完成 PCM 音频信号的播放
 3. 如何读/写标准的 wav 格式的音频文件
+4. 如何使用 OpenSL ES API 接口完成音频的采集与播放
 
 相关博客文章
 ----------
@@ -16,6 +17,10 @@
 [Android音频开发（3）：如何播放一帧音频](http://ticktick.blog.51cto.com/823160/1750593)
 
 [Android音频开发（4）：如何存储和解析wav文件](http://ticktick.blog.51cto.com/823160/1752947)
+
+[Android音频开发（5）：音频数据的编解码](http://ticktick.blog.51cto.com/823160/1760191)
+
+[Android音频开发（6）：使用 OpenSL ES API（上）](http://ticktick.blog.51cto.com/823160/1764778)
 
 感谢
 ----------
