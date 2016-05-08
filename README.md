@@ -22,6 +22,8 @@
 
 [Android音频开发（6）：使用 OpenSL ES API（上）](http://ticktick.blog.51cto.com/823160/1764778)
 
+[Android音频开发（7）：使用 OpenSL ES API（下）](http://ticktick.blog.51cto.com/823160/1771239)
+
 感谢
 ----------
 
