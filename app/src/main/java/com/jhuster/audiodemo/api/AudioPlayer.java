@@ -24,7 +24,7 @@ public class AudioPlayer {
 
     private static final int DEFAULT_STREAM_TYPE = AudioManager.STREAM_MUSIC;
     private static final int DEFAULT_SAMPLE_RATE = 44100;
-    private static final int DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_STEREO;
+    private static final int DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_STEREO;
     private static final int DEFAULT_AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
     private static final int DEFAULT_PLAY_MODE = AudioTrack.MODE_STREAM;
             
