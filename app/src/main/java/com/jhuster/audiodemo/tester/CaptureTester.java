@@ -1,8 +1,10 @@
 package com.jhuster.audiodemo.tester;
 
 import android.os.Environment;
+
 import com.jhuster.audiodemo.api.AudioCapturer;
 import com.jhuster.audiodemo.api.WavFileWriter;
+
 import java.io.IOException;
 
 public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameCapturedListener {
@@ -40,6 +42,6 @@ public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameC
 
     @Override
     public void onAudioFrameCaptured(byte[] audioData) {
-        mWavFileWirter.writeData(audioData,0,audioData.length);
+        mWavFileWirter.writeData(audioData, 0, audioData.length);
     }
 }

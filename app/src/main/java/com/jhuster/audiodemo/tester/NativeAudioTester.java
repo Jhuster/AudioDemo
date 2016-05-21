@@ -36,8 +36,11 @@ public class NativeAudioTester extends Tester {
     }
 
     private native boolean nativeStartCapture();
+
     private native boolean nativeStopCapture();
+
     private native boolean nativeStartPlayback();
+
     private native boolean nativeStopPlayback();
 
     static {
