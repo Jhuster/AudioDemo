@@ -16,7 +16,6 @@ package com.jhuster.audiodemo.api;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.os.SystemClock;
 import android.util.Log;
 
 public class AudioCapturer {
@@ -26,10 +25,12 @@ public class AudioCapturer {
     private static final int DEFAULT_SOURCE = MediaRecorder.AudioSource.MIC;
     private static final int DEFAULT_SAMPLE_RATE = 44100;
     private static final int DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_STEREO;
-    private static final int DEFAULT_AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
+    private static final int DEFAULT_DATA_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
+
+    // Make sure the sample size is the same in different devices
+    private static final int SAMPLES_PER_FRAME = 1024;
 
     private AudioRecord mAudioRecord;
-    private int mMinBufferSize = 0;
 
     private Thread mCaptureThread;
     private boolean mIsCaptureStarted = false;
@@ -38,37 +39,34 @@ public class AudioCapturer {
     private OnAudioFrameCapturedListener mAudioFrameCapturedListener;
 
     public interface OnAudioFrameCapturedListener {
-        public void onAudioFrameCaptured(byte[] audioData);
-    }
-
-    public boolean isCaptureStarted() {
-        return mIsCaptureStarted;
+        void onAudioFrameCaptured(byte[] audioData);
     }
 
     public void setOnAudioFrameCapturedListener(OnAudioFrameCapturedListener listener) {
         mAudioFrameCapturedListener = listener;
     }
 
+    public boolean isCaptureStarted() {
+        return mIsCaptureStarted;
+    }
+
     public boolean startCapture() {
-        return startCapture(DEFAULT_SOURCE, DEFAULT_SAMPLE_RATE, DEFAULT_CHANNEL_CONFIG,
-                DEFAULT_AUDIO_FORMAT);
+        return startCapture(DEFAULT_SOURCE, DEFAULT_SAMPLE_RATE, DEFAULT_CHANNEL_CONFIG, DEFAULT_DATA_FORMAT);
     }
 
     public boolean startCapture(int audioSource, int sampleRateInHz, int channelConfig, int audioFormat) {
-
         if (mIsCaptureStarted) {
             Log.e(TAG, "Capture already started !");
             return false;
         }
 
-        mMinBufferSize = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
-        if (mMinBufferSize == AudioRecord.ERROR_BAD_VALUE) {
+        int minBufferSize = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
+        if (minBufferSize == AudioRecord.ERROR_BAD_VALUE) {
             Log.e(TAG, "Invalid parameter !");
             return false;
         }
-        Log.d(TAG, "getMinBufferSize = " + mMinBufferSize + " bytes !");
 
-        mAudioRecord = new AudioRecord(audioSource, sampleRateInHz, channelConfig, audioFormat, mMinBufferSize);
+        mAudioRecord = new AudioRecord(audioSource, sampleRateInHz, channelConfig, audioFormat, minBufferSize * 4);
         if (mAudioRecord.getState() == AudioRecord.STATE_UNINITIALIZED) {
             Log.e(TAG, "AudioRecord initialize fail !");
             return false;
@@ -88,7 +86,6 @@ public class AudioCapturer {
     }
 
     public void stopCapture() {
-
         if (!mIsCaptureStarted) {
             return;
         }
@@ -114,15 +111,11 @@ public class AudioCapturer {
     }
 
     private class AudioCaptureRunnable implements Runnable {
-
         @Override
         public void run() {
-
             while (!mIsLoopExit) {
-
-                byte[] buffer = new byte[mMinBufferSize];
-
-                int ret = mAudioRecord.read(buffer, 0, mMinBufferSize);
+                byte[] buffer = new byte[SAMPLES_PER_FRAME * 2];
+                int ret = mAudioRecord.read(buffer, 0, buffer.length);
                 if (ret == AudioRecord.ERROR_INVALID_OPERATION) {
                     Log.e(TAG, "Error ERROR_INVALID_OPERATION");
                 } else if (ret == AudioRecord.ERROR_BAD_VALUE) {
@@ -131,10 +124,7 @@ public class AudioCapturer {
                     if (mAudioFrameCapturedListener != null) {
                         mAudioFrameCapturedListener.onAudioFrameCaptured(buffer);
                     }
-                    Log.d(TAG, "OK, Captured " + ret + " bytes !");
                 }
-
-                SystemClock.sleep(10);
             }
         }
     }
