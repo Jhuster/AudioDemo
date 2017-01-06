@@ -50,10 +50,6 @@ public class AudioCapturer {
         mAudioFrameCapturedListener = listener;
     }
 
-    public boolean isCaptureStarted() {
-        return mIsCaptureStarted;
-    }
-
     public boolean startCapture() {
         return startCapture(DEFAULT_SOURCE, DEFAULT_SAMPLE_RATE, DEFAULT_CHANNEL_CONFIG, DEFAULT_DATA_FORMAT);
     }

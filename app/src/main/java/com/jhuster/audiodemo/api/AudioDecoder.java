@@ -50,7 +50,6 @@ public class AudioDecoder {
     }
 
     public boolean open(int samplerate, int channels, int maxBufferSize) {
-
         if (mIsOpened) {
             return true;
         }
@@ -129,7 +128,6 @@ public class AudioDecoder {
     }
 
     public synchronized void render() {
-
         if (!mIsOpened) {
             return;
         }
@@ -155,7 +153,6 @@ public class AudioDecoder {
     }
 
     private MediaFormat createDecoderFormat(String mimetype, int samplerate, int channels, int profile) {
-
         MediaFormat format = new MediaFormat();
 
         format.setString(MediaFormat.KEY_MIME, mimetype);

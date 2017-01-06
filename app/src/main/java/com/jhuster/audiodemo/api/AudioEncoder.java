@@ -62,7 +62,6 @@ public class AudioEncoder {
     }
 
     public boolean open(int samplerate, int channels, int bitrate, int maxBufferSize) {
-
         if (mIsOpened) {
             return true;
         }
@@ -79,7 +78,7 @@ public class AudioEncoder {
             mMediaCodec.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
             mMediaCodec.start();
             mIsOpened = true;
-            Log.d(TAG,"AudioEncoder opened !");
+            Log.i(TAG,"AudioEncoder opened !");
         } 
         catch (IOException e) {        
             e.printStackTrace();
@@ -96,7 +95,7 @@ public class AudioEncoder {
         mMediaCodec.release();
         mMediaCodec = null;
         mIsOpened = false;
-        Log.d(TAG,"AudioEncoder closed !");
+        Log.i(TAG,"AudioEncoder closed !");
     }
     
     public boolean isOpened() {
@@ -108,7 +107,6 @@ public class AudioEncoder {
     }
         
     public synchronized void encode(byte[] input, long presentationTimeUs) {
-        
         if (!mIsOpened) {
             return;
         }
@@ -129,7 +127,6 @@ public class AudioEncoder {
     }
 
     public synchronized void render() {
-
         if (!mIsOpened) {
             return;
         }
