@@ -48,7 +48,6 @@ public class WavFileWriter {
     }
 
     public boolean writeData(byte[] buffer, int offset, int count) {
-
         if (mDataOutputStream == null) {
             return false;
         }
@@ -65,7 +64,6 @@ public class WavFileWriter {
     }
 
     private boolean writeHeader(int sampleRateInHz, int bitsPerSample, int channels) {
-
         if (mDataOutputStream == null) {
             return false;
         }
@@ -95,7 +93,6 @@ public class WavFileWriter {
     }
 
     private boolean writeDataSize() {
-
         if (mDataOutputStream == null) {
             return false;
         }
@@ -103,9 +100,9 @@ public class WavFileWriter {
         try {
             RandomAccessFile wavFile = new RandomAccessFile(mFilepath, "rw");
             wavFile.seek(WavFileHeader.WAV_CHUNKSIZE_OFFSET);
-            wavFile.write(intToByteArray((int) (mDataSize + WavFileHeader.WAV_CHUNKSIZE_EXCLUDE_DATA)), 0, 4);
+            wavFile.write(intToByteArray((mDataSize + WavFileHeader.WAV_CHUNKSIZE_EXCLUDE_DATA)), 0, 4);
             wavFile.seek(WavFileHeader.WAV_SUB_CHUNKSIZE2_OFFSET);
-            wavFile.write(intToByteArray((int) (mDataSize)), 0, 4);
+            wavFile.write(intToByteArray((mDataSize)), 0, 4);
             wavFile.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

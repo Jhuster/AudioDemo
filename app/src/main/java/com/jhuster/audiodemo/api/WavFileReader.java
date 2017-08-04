@@ -48,7 +48,6 @@ public class WavFileReader {
     }
 
     public int readData(byte[] buffer, int offset, int count) {
-
         if (mDataInputStream == null || mWavFileHeader == null) {
             return -1;
         }
@@ -67,7 +66,6 @@ public class WavFileReader {
     }
 
     private boolean readHeader() {
-
         if (mDataInputStream == null) {
             return false;
         }

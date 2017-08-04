@@ -1,7 +1,5 @@
 package com.jhuster.audiodemo.tester;
 
-import android.os.SystemClock;
-
 public class NativeAudioTester extends Tester {
 
     private boolean mIsTestCapture = true;

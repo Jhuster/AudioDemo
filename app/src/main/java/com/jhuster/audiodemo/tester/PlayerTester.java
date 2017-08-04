@@ -17,7 +17,6 @@ public class PlayerTester extends Tester {
 
     @Override
     public boolean startTesting() {
-
         mWavFileReader = new WavFileReader();
         mAudioPlayer = new AudioPlayer();
 

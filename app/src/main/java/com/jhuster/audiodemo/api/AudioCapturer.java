@@ -80,7 +80,7 @@ public class AudioCapturer {
 
         mIsCaptureStarted = true;
 
-        Log.d(TAG, "Start audio capture success !");
+        Log.i(TAG, "Start audio capture success !");
 
         return true;
     }
@@ -107,7 +107,7 @@ public class AudioCapturer {
         mIsCaptureStarted = false;
         mAudioFrameCapturedListener = null;
 
-        Log.d(TAG, "Stop audio capture success !");
+        Log.i(TAG, "Stop audio capture success !");
     }
 
     private class AudioCaptureRunnable implements Runnable {

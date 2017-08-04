@@ -28,7 +28,7 @@ public class AudioPlayer {
     private static final int DEFAULT_AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
     private static final int DEFAULT_PLAY_MODE = AudioTrack.MODE_STREAM;
 
-    private boolean mIsPlayStarted = false;
+    private volatile boolean mIsPlayStarted = false;
     private int mMinBufferSize = 0;
     private AudioTrack mAudioTrack;
 
@@ -37,7 +37,6 @@ public class AudioPlayer {
     }
 
     public boolean startPlayer(int streamType, int sampleRateInHz, int channelConfig, int audioFormat) {
-
         if (mIsPlayStarted) {
             Log.e(TAG, "Player already started !");
             return false;
@@ -48,7 +47,7 @@ public class AudioPlayer {
             Log.e(TAG, "Invalid parameter !");
             return false;
         }
-        Log.d(TAG, "getMinBufferSize = " + mMinBufferSize + " bytes !");
+        Log.i(TAG, "getMinBufferSize = " + mMinBufferSize + " bytes !");
 
         mAudioTrack = new AudioTrack(streamType, sampleRateInHz, channelConfig, audioFormat, mMinBufferSize, DEFAULT_PLAY_MODE);
         if (mAudioTrack.getState() == AudioTrack.STATE_UNINITIALIZED) {
@@ -58,7 +57,7 @@ public class AudioPlayer {
 
         mIsPlayStarted = true;
 
-        Log.d(TAG, "Start audio player success !");
+        Log.i(TAG, "Start audio player success !");
 
         return true;
     }
@@ -68,7 +67,6 @@ public class AudioPlayer {
     }
 
     public void stopPlayer() {
-
         if (!mIsPlayStarted) {
             return;
         }
@@ -80,11 +78,10 @@ public class AudioPlayer {
         mAudioTrack.release();
         mIsPlayStarted = false;
 
-        Log.d(TAG, "Stop audio player success !");
+        Log.i(TAG, "Stop audio player success !");
     }
 
     public boolean play(byte[] audioData, int offsetInBytes, int sizeInBytes) {
-
         if (!mIsPlayStarted) {
             Log.e(TAG, "Player not started !");
             return false;

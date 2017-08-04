@@ -12,14 +12,14 @@ public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameC
     private static final String DEFAULT_TEST_FILE = Environment.getExternalStorageDirectory() + "/test.wav";
 
     private AudioCapturer mAudioCapturer;
-    private WavFileWriter mWavFileWirter;
+    private WavFileWriter mWavFileWriter;
 
     @Override
     public boolean startTesting() {
         mAudioCapturer = new AudioCapturer();
-        mWavFileWirter = new WavFileWriter();
+        mWavFileWriter = new WavFileWriter();
         try {
-            mWavFileWirter.openFile(DEFAULT_TEST_FILE, 44100, 16, 2);
+            mWavFileWriter.openFile(DEFAULT_TEST_FILE, 44100, 16, 2);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameC
     public boolean stopTesting() {
         mAudioCapturer.stopCapture();
         try {
-            mWavFileWirter.closeFile();
+            mWavFileWriter.closeFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,6 +42,6 @@ public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameC
 
     @Override
     public void onAudioFrameCaptured(byte[] audioData) {
-        mWavFileWirter.writeData(audioData, 0, audioData.length);
+        mWavFileWriter.writeData(audioData, 0, audioData.length);
     }
 }
