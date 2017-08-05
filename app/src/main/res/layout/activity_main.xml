@@ -24,4 +24,10 @@
         android:layout_margin="10dp"
         android:onClick="onClickStopTest" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="注：编解码测试，请带上耳机" />
+
 </LinearLayout>
