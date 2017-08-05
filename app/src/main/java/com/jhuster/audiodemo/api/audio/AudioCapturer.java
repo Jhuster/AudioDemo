@@ -11,7 +11,7 @@
  *  @author  Jhuster
  *  @date    2016/03/19
  */
-package com.jhuster.audiodemo.api;
+package com.jhuster.audiodemo.api.audio;
 
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -24,7 +24,7 @@ public class AudioCapturer {
 
     private static final int DEFAULT_SOURCE = MediaRecorder.AudioSource.MIC;
     private static final int DEFAULT_SAMPLE_RATE = 44100;
-    private static final int DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_STEREO;
+    private static final int DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     private static final int DEFAULT_DATA_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
 
     // Make sure the sample size is the same in different devices
@@ -121,6 +121,7 @@ public class AudioCapturer {
                 } else if (ret == AudioRecord.ERROR_BAD_VALUE) {
                     Log.e(TAG, "Error ERROR_BAD_VALUE");
                 } else {
+                    Log.d("TAG", "Audio captured: " + buffer.length);
                     if (mAudioFrameCapturedListener != null) {
                         mAudioFrameCapturedListener.onAudioFrameCaptured(buffer);
                     }

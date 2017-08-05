@@ -11,7 +11,7 @@
  *  @author  Jhuster
  *  @date    2016/03/19
  */
-package com.jhuster.audiodemo.api;
+package com.jhuster.audiodemo.api.wav;
 
 public class WavFileHeader {
 
@@ -42,7 +42,7 @@ public class WavFileHeader {
 
     }
 
-    public WavFileHeader(int sampleRateInHz, int bitsPerSample, int channels) {
+    public WavFileHeader(int sampleRateInHz, int channels, int bitsPerSample) {
         mSampleRate = sampleRateInHz;
         mBitsPerSample = (short) bitsPerSample;
         mNumChannel = (short) channels;

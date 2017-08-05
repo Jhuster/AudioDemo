@@ -8,10 +8,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.jhuster.audiodemo.R;
-import com.jhuster.audiodemo.tester.CaptureTester;
+import com.jhuster.audiodemo.tester.AudioCaptureTester;
 import com.jhuster.audiodemo.tester.NativeAudioTester;
-import com.jhuster.audiodemo.tester.AudioCodecTester;
-import com.jhuster.audiodemo.tester.PlayerTester;
+import com.jhuster.audiodemo.tester.AudioPlayerTester;
 import com.jhuster.audiodemo.tester.Tester;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
             "播放 wav 文件",
             "OpenSL ES 录制",
             "OpenSL ES 播放",
-            "音频编解码"
     };
 
     @Override
@@ -40,19 +38,16 @@ public class MainActivity extends AppCompatActivity {
     public void onClickStartTest(View v) {
         switch (mTestSpinner.getSelectedItemPosition()) {
             case 0:
-                mTester = new CaptureTester();
+                mTester = new AudioCaptureTester();
                 break;
             case 1:
-                mTester = new PlayerTester();
+                mTester = new AudioPlayerTester();
                 break;
             case 2:
                 mTester = new NativeAudioTester(true);
                 break;
             case 3:
                 mTester = new NativeAudioTester(false);
-                break;
-            case 4:
-                mTester = new AudioCodecTester();
                 break;
             default:
                 break;

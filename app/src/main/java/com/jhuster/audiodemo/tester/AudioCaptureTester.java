@@ -1,13 +1,15 @@
 package com.jhuster.audiodemo.tester;
 
+import android.media.AudioFormat;
+import android.media.MediaRecorder;
 import android.os.Environment;
 
-import com.jhuster.audiodemo.api.AudioCapturer;
-import com.jhuster.audiodemo.api.WavFileWriter;
+import com.jhuster.audiodemo.api.audio.AudioCapturer;
+import com.jhuster.audiodemo.api.wav.WavFileWriter;
 
 import java.io.IOException;
 
-public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameCapturedListener {
+public class AudioCaptureTester extends Tester implements AudioCapturer.OnAudioFrameCapturedListener {
 
     private static final String DEFAULT_TEST_FILE = Environment.getExternalStorageDirectory() + "/test.wav";
 
@@ -19,13 +21,14 @@ public class CaptureTester extends Tester implements AudioCapturer.OnAudioFrameC
         mAudioCapturer = new AudioCapturer();
         mWavFileWriter = new WavFileWriter();
         try {
-            mWavFileWriter.openFile(DEFAULT_TEST_FILE, 44100, 16, 2);
+            mWavFileWriter.openFile(DEFAULT_TEST_FILE, 44100, 1, 16);
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
         mAudioCapturer.setOnAudioFrameCapturedListener(this);
-        return mAudioCapturer.startCapture();
+        return mAudioCapturer.startCapture(MediaRecorder.AudioSource.MIC, 44100, AudioFormat.CHANNEL_IN_MONO,
+                AudioFormat.ENCODING_PCM_16BIT);
     }
 
     @Override

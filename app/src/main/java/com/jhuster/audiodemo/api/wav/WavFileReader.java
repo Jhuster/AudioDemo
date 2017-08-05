@@ -11,7 +11,7 @@
  *  @author  Jhuster
  *  @date    2016/03/19
  */
-package com.jhuster.audiodemo.api;
+package com.jhuster.audiodemo.api.wav;
 
 import android.util.Log;
 

@@ -11,7 +11,7 @@
  *  @author  Jhuster
  *  @date    2016/03/19
  */
-package com.jhuster.audiodemo.api;
+package com.jhuster.audiodemo.api.wav;
 
 import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
@@ -27,7 +27,7 @@ public class WavFileWriter {
     private int mDataSize = 0;
     private DataOutputStream mDataOutputStream;
 
-    public boolean openFile(String filepath, int sampleRateInHz, int bitsPerSample, int channels) throws IOException {
+    public boolean openFile(String filepath, int sampleRateInHz, int channels, int bitsPerSample) throws IOException {
         if (mDataOutputStream != null) {
             closeFile();
         }
@@ -63,27 +63,27 @@ public class WavFileWriter {
         return true;
     }
 
-    private boolean writeHeader(int sampleRateInHz, int bitsPerSample, int channels) {
+    private boolean writeHeader(int sampleRateInHz, int channels, int bitsPerSample) {
         if (mDataOutputStream == null) {
             return false;
         }
 
-        WavFileHeader header = new WavFileHeader(sampleRateInHz, bitsPerSample, channels);
+        WavFileHeader header = new WavFileHeader(sampleRateInHz, channels, bitsPerSample);
 
         try {
             mDataOutputStream.writeBytes(header.mChunkID);
-            mDataOutputStream.write(intToByteArray((int) header.mChunkSize), 0, 4);
+            mDataOutputStream.write(intToByteArray(header.mChunkSize), 0, 4);
             mDataOutputStream.writeBytes(header.mFormat);
             mDataOutputStream.writeBytes(header.mSubChunk1ID);
-            mDataOutputStream.write(intToByteArray((int) header.mSubChunk1Size), 0, 4);
-            mDataOutputStream.write(shortToByteArray((short) header.mAudioFormat), 0, 2);
-            mDataOutputStream.write(shortToByteArray((short) header.mNumChannel), 0, 2);
-            mDataOutputStream.write(intToByteArray((int) header.mSampleRate), 0, 4);
-            mDataOutputStream.write(intToByteArray((int) header.mByteRate), 0, 4);
-            mDataOutputStream.write(shortToByteArray((short) header.mBlockAlign), 0, 2);
-            mDataOutputStream.write(shortToByteArray((short) header.mBitsPerSample), 0, 2);
+            mDataOutputStream.write(intToByteArray(header.mSubChunk1Size), 0, 4);
+            mDataOutputStream.write(shortToByteArray(header.mAudioFormat), 0, 2);
+            mDataOutputStream.write(shortToByteArray(header.mNumChannel), 0, 2);
+            mDataOutputStream.write(intToByteArray(header.mSampleRate), 0, 4);
+            mDataOutputStream.write(intToByteArray(header.mByteRate), 0, 4);
+            mDataOutputStream.write(shortToByteArray(header.mBlockAlign), 0, 2);
+            mDataOutputStream.write(shortToByteArray(header.mBitsPerSample), 0, 2);
             mDataOutputStream.writeBytes(header.mSubChunk2ID);
-            mDataOutputStream.write(intToByteArray((int) header.mSubChunk2Size), 0, 4);
+            mDataOutputStream.write(intToByteArray(header.mSubChunk2Size), 0, 4);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

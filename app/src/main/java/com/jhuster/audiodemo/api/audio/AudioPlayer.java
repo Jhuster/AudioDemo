@@ -11,7 +11,7 @@
  *  @author  Jhuster
  *  @date    2016/03/19
  */
-package com.jhuster.audiodemo.api;
+package com.jhuster.audiodemo.api.audio;
 
 import android.util.Log;
 import android.media.AudioFormat;
@@ -24,12 +24,11 @@ public class AudioPlayer {
 
     private static final int DEFAULT_STREAM_TYPE = AudioManager.STREAM_MUSIC;
     private static final int DEFAULT_SAMPLE_RATE = 44100;
-    private static final int DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_STEREO;
+    private static final int DEFAULT_CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_MONO;
     private static final int DEFAULT_AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
     private static final int DEFAULT_PLAY_MODE = AudioTrack.MODE_STREAM;
 
     private volatile boolean mIsPlayStarted = false;
-    private int mMinBufferSize = 0;
     private AudioTrack mAudioTrack;
 
     public boolean startPlayer() {
@@ -42,14 +41,14 @@ public class AudioPlayer {
             return false;
         }
 
-        mMinBufferSize = AudioTrack.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
-        if (mMinBufferSize == AudioTrack.ERROR_BAD_VALUE) {
+        int bufferSizeInBytes = AudioTrack.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
+        if (bufferSizeInBytes == AudioTrack.ERROR_BAD_VALUE) {
             Log.e(TAG, "Invalid parameter !");
             return false;
         }
-        Log.i(TAG, "getMinBufferSize = " + mMinBufferSize + " bytes !");
+        Log.i(TAG, "getMinBufferSize = " + bufferSizeInBytes + " bytes !");
 
-        mAudioTrack = new AudioTrack(streamType, sampleRateInHz, channelConfig, audioFormat, mMinBufferSize, DEFAULT_PLAY_MODE);
+        mAudioTrack = new AudioTrack(streamType, sampleRateInHz, channelConfig, audioFormat, bufferSizeInBytes, DEFAULT_PLAY_MODE);
         if (mAudioTrack.getState() == AudioTrack.STATE_UNINITIALIZED) {
             Log.e(TAG, "AudioTrack initialize fail !");
             return false;
@@ -60,10 +59,6 @@ public class AudioPlayer {
         Log.i(TAG, "Start audio player success !");
 
         return true;
-    }
-
-    public int getMinBufferSize() {
-        return mMinBufferSize;
     }
 
     public void stopPlayer() {
@@ -84,11 +79,6 @@ public class AudioPlayer {
     public boolean play(byte[] audioData, int offsetInBytes, int sizeInBytes) {
         if (!mIsPlayStarted) {
             Log.e(TAG, "Player not started !");
-            return false;
-        }
-
-        if (sizeInBytes < mMinBufferSize) {
-            Log.e(TAG, "audio data is not enough !");
             return false;
         }
 
