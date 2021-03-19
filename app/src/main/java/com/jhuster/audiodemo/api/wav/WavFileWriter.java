@@ -34,7 +34,7 @@ public class WavFileWriter {
         mFilepath = filepath;
         mDataSize = 0;
         mDataOutputStream = new DataOutputStream(new FileOutputStream(filepath));
-        return writeHeader(sampleRateInHz, bitsPerSample, channels);
+        return writeHeader(sampleRateInHz,  channels, bitsPerSample);
     }
 
     public boolean closeFile() throws IOException {
