@@ -16,7 +16,7 @@ package com.jhuster.audiodemo.api.wav;
 public class WavFileHeader {
 
     public static final int WAV_FILE_HEADER_SIZE = 44;
-    public static final int WAV_CHUNKSIZE_EXCLUDE_DATA = 36;
+    public static final int WAV_CHUNKSIZE_EXCLUDE_DATA = 32;
 
     public static final int WAV_CHUNKSIZE_OFFSET = 4;
     public static final int WAV_SUB_CHUNKSIZE1_OFFSET = 16;
